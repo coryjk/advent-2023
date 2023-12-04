@@ -1,11 +1,11 @@
 use std::collections::HashMap;
 use crate::problem::Problem;
 
-pub struct Day1 {
+pub struct Day01 {
     pub input: Vec<String>,
 }
 
-impl Day1 {
+impl Day01 {
 
     fn join_digits(line: &str) -> u32 {
         let (mut i, mut j) = (0, line.len() - 1);
@@ -39,16 +39,14 @@ impl Day1 {
         // replace char digits or spelled digits from start, going forward
         let first = (0..line.len())
             .find_map(|i| digits_map.keys()
-                .find(|key| line[i..]
-                    .starts_with(*key)))
+                .find(|key| line[i..].starts_with(*key)))
             .unwrap();
 
         // replace char digits or spelled digits from end, going backward
         let last = (0..line.len())
             .find_map(|i| {
                 digits_map.keys()
-                    .find(|key| line[..(line.len() - i)]
-                        .ends_with(*key))
+                    .find(|key| line[..(line.len() - i)].ends_with(*key))
             })
             .unwrap();
 
@@ -56,10 +54,10 @@ impl Day1 {
     }
 }
 
-impl Problem for Day1 {
+impl Problem for Day01 {
     fn solve_part_one(&self) -> String {
         self.input.to_owned().into_iter()
-            .map(|n| Day1::join_digits(&n))
+            .map(|n| Day01::join_digits(&n))
             .sum::<u32>()
             .to_string()
     }
@@ -87,7 +85,7 @@ impl Problem for Day1 {
         ]);
 
         self.input.to_owned().into_iter()
-            .map(|line| Day1::replace_digits(&digits, &line))
+            .map(|line| Day01::replace_digits(&digits, &line))
             .sum::<u32>()
             .to_string()
     }
